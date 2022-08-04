@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+    <head th:replace="baseLayout">
+        <meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
+        <title>Make It Legal</title>
+    </head>
+    <body>
+    <div style="min-height: 100vh; background: rgb(252,207,107); background: linear-gradient(45deg, rgba(252,207,107,1) 0%, rgba(244,143,43,1) 50%, rgba(255,108,200,1) 100%);">
+        <div class="d-flex flex-column justify-content-center align-items-center mx-auto" style="height: 100vh; width: 600px">
+            <img src="images/user-avatar.jpg" alt="User Avatar" class="rounded-circle border border-white mb-4" style="box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px">
+            <h3 class="card-title text-light fw-bold pb-4">User Register</h3>
+            <div class="card text-center card-body" style="flex: 0; width: 70%; margin-bottom: 20%; padding: 5% 0; box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px">
+                <form th:action="@{/register}" method="post">
+                    <div class="mb-3"><input type="text" name="nombre" placeholder="Nombre" style="width: 80%; padding: 10px; background: #e9ecef; border: 0"/></div>
+                    <div class="mb-3"><input type="text" name="apellido" placeholder="Apellido" style="width: 80%; padding: 10px; background: #e9ecef; border: 0"/></div>
+                    <div><input type="text" name="username" placeholder="Username" style="width: 80%; padding: 10px; background: #e9ecef; border: 0"/></div>
+                    <div th:if="${param.error}" class="text-danger">
+                        <p th:if="${userExists}" th:text="El usuario ya existe" />
+                        <p th:if="${userWrongDomain}" th:text="No es dominio @basf.com" />
+                    </div>
+                    <div style="visibility: hidden"><label> Password: <input type="password" name="password" value="123456"></label></div>
+                    <div><input type="submit" value="Sign In" class="fw-bold text-light" style="width: 80%;  padding: 10px; border: 0; background: rgb(252,207,107); background: linear-gradient(45deg, rgba(252,207,107,1) 0%, rgba(244,143,43,1) 50%, rgba(255,108,200,1) 100%)" /></div>
+                </form>
+            </div>
+        </div>
+    </div>
+    </body>
+</html>
