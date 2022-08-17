@@ -16,12 +16,6 @@ public class UsuarioController {
     @Autowired
     private UsuarioService service;
 
-    //TODO: Borrar Testeo de autenticacion
-    @GetMapping("test")
-    public String test(){
-        return "test";
-    }
-
     @GetMapping("/login")
     public String login(){
         return "login";

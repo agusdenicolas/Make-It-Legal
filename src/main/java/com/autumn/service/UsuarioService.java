@@ -37,13 +37,12 @@ public class UsuarioService implements UserDetailsService {
     }
 
     public boolean[] register(Usuario newUsuario){
-        Usuario usuario = repository.findByMail(newUsuario.getMail());
-        System.out.println("Desde Service: " + newUsuario);
         //[0] -> existe el usuario?, [1] -> mail @basf.com?
         boolean validaciones [] = {false, false};
 
+        Usuario usuarioExiste = repository.findByMail(newUsuario.getMail());
         //El usuario ya existe
-        if(usuario != null){
+        if(usuarioExiste != null){
             validaciones[0] = true;
         }
         //El usuario no es de dominio Basf
@@ -53,7 +52,6 @@ public class UsuarioService implements UserDetailsService {
         if(!validaciones[0] && !validaciones[1]){
             newUsuario.setRol("USUARIO");
             newUsuario.setContrasena(encoder.encode(newUsuario.getContrasena()));
-            System.out.println("Despues de encryptar: " + newUsuario);
             repository.save(newUsuario);
         }
         return validaciones;

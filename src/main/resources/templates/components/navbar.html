@@ -1,0 +1,14 @@
+<div th:fragment="navbar">
+    <nav class="navbar" style="background: var(--orange-color)">
+        <div class="container-fluid">
+            <a class="navbar-brand">Navbar</a>
+            <form class="d-flex" role="search">
+                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-success" type="submit">Search</button>
+            </form>
+            <form th:action="@{/logout}" method="post">
+                <div><input type="submit" value="Log Out" class="fw-bold text-light" style="width: 80%;  padding: 10px; border: 0; background: rgb(252,207,107); background: linear-gradient(45deg, rgba(252,207,107,1) 0%, rgba(244,143,43,1) 50%, rgba(255,108,200,1) 100%)" /></div>
+            </form>
+        </div>
+    </nav>
+</div>

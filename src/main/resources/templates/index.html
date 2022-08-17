@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org">
+    <head th:replace="baseLayout">
+        <meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
+    </head>
+    <body class="d-flex" style="background: var(--gray-color)">
+        <!-- <div th:replace="components/navbar :: navbar" /> -->
+        <h1>Make it Legal</h1>
+        <div class="container">
+            <div class="row">
+                <a href="/usuarios/contratos">
+                    <button class="col-6 col-sm-3 m-3" style="background: var(--orange-color)">
+                        Usuarios
+                    </button>
+                </a>
+                <a href="/legales/contratos">
+                    <button class="col-6 col-sm-3 m-3" style="background: var(--orange-color)">
+                        Legales
+                    </button>
+                </a>
+            </div>
+            <div class="row">
+                <a href="/impuestos/contratos">
+                    <button class="col-6 col-sm-3 m-3" style="background: var(--orange-color)">
+                        Impuestos
+                    </button>
+                </a>
+                <a href="/apoderados/contratos">
+                    <button class="col-6 col-sm-3 m-3" style="background: var(--orange-color)">
+                        Apoderados
+                    </button>
+                </a>
+            </div>
+        </div>
+    </body>
+</html>
