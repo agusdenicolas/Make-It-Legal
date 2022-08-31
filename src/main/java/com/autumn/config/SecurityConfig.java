@@ -26,8 +26,8 @@ public class SecurityConfig {
                     .hasAuthority("IBP")
                     .antMatchers("/register")
                     .permitAll()
-                    .anyRequest()
-                    .authenticated()
+                //    .anyRequest() TODO: Volver a poner el Authenticated
+                //    .authenticated()
                 .and()
                     .formLogin()
                     .loginPage("/login")

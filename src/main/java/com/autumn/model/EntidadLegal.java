@@ -1,6 +1,11 @@
 package com.autumn.model;
 
+import org.springframework.beans.factory.annotation.Value;
+
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 @Entity(name = "entidadeslegales")
 public class EntidadLegal {
@@ -10,9 +15,10 @@ public class EntidadLegal {
     @Column(name = "entidadlegal_id")
     private Long id;
     @Column(name = "entidadlegal_nombre")
+    @NotEmpty
     private String nombre;
     @Column(name = "entidadlegal_activo")
-    private boolean _activo;
+    private boolean isActivo;
 
     public Long getId() {
         return id;
@@ -30,12 +36,12 @@ public class EntidadLegal {
         this.nombre = nombre;
     }
 
-    public boolean is_activo() {
-        return _activo;
+    public boolean getIsActivo() {
+        return isActivo;
     }
 
-    public void set_activo(boolean _activo) {
-        this._activo = _activo;
+    public void setIsActivo(boolean isActivo) {
+        this.isActivo = isActivo;
     }
 
     @Override
@@ -43,7 +49,7 @@ public class EntidadLegal {
         return "EntidadLegal{" +
                 "id=" + id +
                 ", nombre='" + nombre + '\'' +
-                ", _activo=" + _activo +
+                ", isActivo=" + isActivo +
                 '}';
     }
 }

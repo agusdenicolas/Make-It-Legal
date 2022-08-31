@@ -11,7 +11,7 @@
                 <h3 class="card-title text-light fw-bold pb-4">User Login</h3>
                 <div class="card text-center card-body" style="flex: 0; width: 70%; margin-bottom: 20%; padding: 5% 0; box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px">
                     <form th:action="@{/login}" method="post">
-                        <div><input type="text" name="username" placeholder="Username" class="mb-3" style="width: 80%; padding: 10px; background: #e9ecef; border: 0"/></div>
+                        <div><input type="text" name="username" placeholder="mail@basf.com" class="mb-3" style="width: 80%; padding: 10px; background: #e9ecef; border: 0"/></div>
                         <div th:if="${param.error}" class="text-danger">
                             El Username es incorrecto o no existe.
                         </div>

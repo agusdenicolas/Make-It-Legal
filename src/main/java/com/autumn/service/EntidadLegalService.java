@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class EntidadLegalService {
@@ -13,30 +14,33 @@ public class EntidadLegalService {
     @Autowired
     private IEntidadLegalRepository repository;
 
-    public void create(EntidadLegal entidadLegal){
-        if (repository.findByNombre(entidadLegal.getNombre()) != null){
+    public boolean create(EntidadLegal entidadLegal){
+        if (repository.findByNombre(entidadLegal.getNombre()) == null){
             repository.save(entidadLegal);
-            //TODO: Borrar SOUT
-            System.out.println("La entidad legal " + entidadLegal + " fue guardada exitosamente");
-        }else {
-            //TODO: Borrar SOUT
-            System.out.println("Ya existe la entidad legal: " + entidadLegal);
+            return false;
         }
+        return true;
     }
 
-    public void delete(Long id){
-
+    public boolean update(EntidadLegal entidadLegal){
+        EntidadLegal entidadLegalBuscada = repository.findByNombre(entidadLegal.getNombre());
+        if( entidadLegalBuscada == null || entidadLegalBuscada.getId() == entidadLegal.getId()) {
+            repository.save(entidadLegal);
+            return false;
+        }
+        return true;
     }
 
-    public void update(EntidadLegal entidadLegal){
-
-    }
-
-    public EntidadLegal get(Long id){
+    public EntidadLegal getOne(Long id){
+        Optional<EntidadLegal> optionalEntidadLegal = repository.findById(id);
+        if(optionalEntidadLegal.isPresent()){
+            //.get() castea el "Optional" a "Entidad Legal"
+            return optionalEntidadLegal.get();
+        }
         return null;
     }
 
     public List<EntidadLegal> getAll(){
-        return null;
+        return repository.findAll();
     }
 }

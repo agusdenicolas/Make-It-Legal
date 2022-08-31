@@ -13,7 +13,7 @@
                 <form th:action="@{/register}" method="post">
                     <div class="mb-3"><input type="text" name="nombre" placeholder="Nombre" style="width: 80%; padding: 10px; background: #e9ecef; border: 0"/></div>
                     <div class="mb-3"><input type="text" name="apellido" placeholder="Apellido" style="width: 80%; padding: 10px; background: #e9ecef; border: 0"/></div>
-                    <div class="mb-3"><input type="text" name="mail" placeholder="Username" style="width: 80%; padding: 10px; background: #e9ecef; border: 0"/></div>
+                    <div class="mb-3"><input type="text" name="mail" placeholder="mail@basf.com" style="width: 80%; padding: 10px; background: #e9ecef; border: 0"/></div>
                     <div th:if="${param.error}" class="text-danger">
                         <p th:if="${param.userExists}">El usuario ya existe</p>
                         <p th:if="${param.userWrongDomain}">No es dominio @basf.com</p>
