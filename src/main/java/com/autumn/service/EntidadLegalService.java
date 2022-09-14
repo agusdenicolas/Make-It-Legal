@@ -23,8 +23,8 @@ public class EntidadLegalService {
     }
 
     public boolean update(EntidadLegal entidadLegal){
-        EntidadLegal entidadLegalBuscada = repository.findByNombre(entidadLegal.getNombre());
-        if( entidadLegalBuscada == null || entidadLegalBuscada.getId() == entidadLegal.getId()) {
+        EntidadLegal entidadLegalExists = repository.findByNombre(entidadLegal.getNombre());
+        if( entidadLegalExists == null || entidadLegalExists.getId() == entidadLegal.getId()) {
             repository.save(entidadLegal);
             return false;
         }

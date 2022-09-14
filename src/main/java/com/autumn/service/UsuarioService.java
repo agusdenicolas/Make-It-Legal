@@ -12,8 +12,10 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UsuarioService implements UserDetailsService {
@@ -55,5 +57,18 @@ public class UsuarioService implements UserDetailsService {
             repository.save(newUsuario);
         }
         return validaciones;
+    }
+
+    public Usuario getOne(Long id){
+        Optional<Usuario> optionalusuario = repository.findById(id);
+        if(optionalusuario.isPresent()){
+            //.get() castea el "Optional" a "BUFU"
+            return optionalusuario.get();
+        }
+        return null;
+    }
+
+    public List<Usuario> getAllIbps(){
+        return repository.findByRol("IBP");
     }
 }

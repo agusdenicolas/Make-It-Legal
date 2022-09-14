@@ -28,7 +28,7 @@ public class EntidadLegalController {
     }
 
     @PostMapping
-    public String postEntidadesLegales(@Valid @ModelAttribute EntidadLegal entidadLegal,
+    public String postEntidadesLegales(@Valid @ModelAttribute("entidadLegal") EntidadLegal entidadLegal,
                                                        BindingResult result, ModelMap model){
         if (result.hasErrors()){
             model.addAttribute("list_entidadeslegales", service.getAll());
@@ -66,10 +66,10 @@ public class EntidadLegalController {
         return "redirect:/legales/configuracion/entidadeslegales";
     }
 
-    @GetMapping("/delete/{id}")
+/*    @GetMapping("/delete/{id}")
     public String deleteEntidadesLegales(Model model, @PathVariable(name = "id") Long id){
         //service.update(entidadLegal);
         System.out.println("DELETE: " + id);
         return "redirect:/legales/configuracion/entidadeslegales";
-    }
+    }*/
 }

@@ -1,6 +1,11 @@
 package com.autumn.model;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity(name = "usuarios")
 public class Usuario {
@@ -19,8 +24,14 @@ public class Usuario {
     private String contrasena;
     @Column(name = "usuario_rol")
     private String rol;
-    @Column(name = "entidadlegal_id")
-    private Long entidadLegalId;
+
+    @JoinColumn(name = "entidadlegal_id")
+    @ManyToOne(cascade = CascadeType.ALL)
+    private EntidadLegal entidadLegal;
+
+    @Fetch(FetchMode.JOIN)
+    @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST}, mappedBy = "ibps")
+    private Set<BUFU> bufus = new HashSet<>();
 
     public Long getId() {
         return id;
@@ -70,13 +81,22 @@ public class Usuario {
         this.rol = rol;
     }
 
-    public Long getEntidadLegalId() {
-        return entidadLegalId;
+    public EntidadLegal getEntidadLegal() {
+        return entidadLegal;
     }
 
-    public void setEntidadLegalId(Long entidadLegalId) {
-        this.entidadLegalId = entidadLegalId;
+    public void setEntidadLegal(EntidadLegal entidadLegal) {
+        this.entidadLegal = entidadLegal;
     }
+
+    public Set<BUFU> getBufus() {
+        return bufus;
+    }
+
+    public void setBufus(Set<BUFU> bufus) {
+        this.bufus = bufus;
+    }
+
 
     @Override
     public String toString() {
@@ -87,7 +107,7 @@ public class Usuario {
                 ", mail='" + mail + '\'' +
                 ", contrasena='" + contrasena + '\'' +
                 ", rol='" + rol + '\'' +
-                ", entidadLegalId=" + entidadLegalId +
+                ", entidadLegal=" + entidadLegal +
                 '}';
     }
 }

@@ -1,11 +1,7 @@
 package com.autumn.model;
 
-import org.springframework.beans.factory.annotation.Value;
-
 import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
 
 @Entity(name = "entidadeslegales")
 public class EntidadLegal {
@@ -14,8 +10,8 @@ public class EntidadLegal {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "entidadlegal_id")
     private Long id;
-    @Column(name = "entidadlegal_nombre")
     @NotEmpty
+    @Column(name = "entidadlegal_nombre")
     private String nombre;
     @Column(name = "entidadlegal_activo")
     private boolean isActivo;
