@@ -69,10 +69,11 @@ public class BUFU {
         usuario.getBufus().remove(this);
     }
 
-    public Usuario findUserById(Long id){
-        Usuario user = this.ibps.stream().filter(ibp -> ibp.getId() == id).findFirst().get();
-        return user;
-    }
+    //TODO: Borrar pq no se usa en ningun lado
+//    public Usuario findUserById(Long id){
+//        Usuario user = this.ibps.stream().filter(ibp -> ibp.getId() == id).findFirst().get();
+//        return user;
+//    }
 
     @Override
     public String toString() {

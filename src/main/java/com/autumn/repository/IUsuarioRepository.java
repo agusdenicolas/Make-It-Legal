@@ -10,8 +10,11 @@ import java.util.List;
 public interface IUsuarioRepository extends JpaRepository<Usuario, Long> {
     Usuario findByMail(String mail);
 
-    //TODO: Change "rol" to Enum
     List<Usuario> findByRol(String rol);
+
+    List<Usuario> findByRolIs(String emptyRol);
+
+    List<Usuario> findByRolIsNotAndRolIsNot(String rol, String emptyRol);
 
     List<Usuario> findUsuarioByBufusId(Long bufuId);
 }

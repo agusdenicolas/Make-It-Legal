@@ -24,6 +24,8 @@ public class Usuario {
     private String contrasena;
     @Column(name = "usuario_rol")
     private String rol;
+    @Column(name = "usuario_activo")
+    private boolean isActivo;
 
     @JoinColumn(name = "entidadlegal_id")
     @ManyToOne(cascade = CascadeType.ALL)
@@ -81,6 +83,14 @@ public class Usuario {
         this.rol = rol;
     }
 
+    public boolean getIsActivo() {
+        return isActivo;
+    }
+
+    public void setIsActivo(boolean isActivo) {
+        this.isActivo = isActivo;
+    }
+
     public EntidadLegal getEntidadLegal() {
         return entidadLegal;
     }
@@ -97,7 +107,6 @@ public class Usuario {
         this.bufus = bufus;
     }
 
-
     @Override
     public String toString() {
         return "Usuario{" +
@@ -107,7 +116,8 @@ public class Usuario {
                 ", mail='" + mail + '\'' +
                 ", contrasena='" + contrasena + '\'' +
                 ", rol='" + rol + '\'' +
+                ", isActivo=" + isActivo +
                 ", entidadLegal=" + entidadLegal +
-                '}';
+        '}';
     }
 }

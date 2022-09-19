@@ -2,6 +2,7 @@ package com.autumn.service;
 
 import com.autumn.model.Usuario;
 import com.autumn.repository.IUsuarioRepository;
+import com.autumn.utils.Rol;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -12,7 +13,6 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -38,6 +38,7 @@ public class UsuarioService implements UserDetailsService {
         return userDetails;
     }
 
+    //Registers a new User
     public boolean[] register(Usuario newUsuario){
         //[0] -> existe el usuario?, [1] -> mail @basf.com?
         boolean validaciones [] = {false, false};
@@ -52,7 +53,7 @@ public class UsuarioService implements UserDetailsService {
             validaciones[1] = true;
         }
         if(!validaciones[0] && !validaciones[1]){
-            newUsuario.setRol("USUARIO");
+            newUsuario.setRol(Rol.USUARIO.getRol());
             newUsuario.setContrasena(encoder.encode(newUsuario.getContrasena()));
             repository.save(newUsuario);
         }
@@ -68,7 +69,15 @@ public class UsuarioService implements UserDetailsService {
         return null;
     }
 
+    public void update(Usuario usuario){
+        repository.save(usuario);
+    }
+
+    public List<Usuario> getAllRolNull(){ return repository.findByRolIs(""); }
+
+    public List<Usuario> getAllNotRolUsuarioAndNotRolNull(){ return repository.findByRolIsNotAndRolIsNot(Rol.USUARIO.getRol(), ""); }
+
     public List<Usuario> getAllIbps(){
-        return repository.findByRol("IBP");
+        return repository.findByRol(Rol.IBP.getRol());
     }
 }

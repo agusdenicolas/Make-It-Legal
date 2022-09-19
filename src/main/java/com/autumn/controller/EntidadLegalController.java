@@ -65,11 +65,4 @@ public class EntidadLegalController {
 
         return "redirect:/legales/configuracion/entidadeslegales";
     }
-
-/*    @GetMapping("/delete/{id}")
-    public String deleteEntidadesLegales(Model model, @PathVariable(name = "id") Long id){
-        //service.update(entidadLegal);
-        System.out.println("DELETE: " + id);
-        return "redirect:/legales/configuracion/entidadeslegales";
-    }*/
 }
