@@ -1,0 +1,42 @@
+.status-bar > ul {
+    text-align: center;
+}
+
+.status-bar > ul > li {
+    display: inline-block;
+    position: relative;
+    width: 100px;
+    height: 100px;
+}
+
+.status-bar-icon::before{
+    padding: 5px;
+    background: gray;
+    color: #ffffff;
+    font-size: 1.2rem;
+    border-radius: 50%;
+    z-index: 10;
+}
+
+.status-bar-icon::after{
+    content: '';
+    background: gray;
+    height: 6px;
+    width:100%;
+    top: 11px;
+    left: 50%;
+    z-index: -1;
+    display: block;
+    position: absolute;
+}
+li:last-child .status-bar-icon::after{
+    width: 0;
+}
+
+.on::before{
+    background: var(--aquagreen-color);
+}
+
+.on::after{
+    background: var(--aquagreen-color);
+}

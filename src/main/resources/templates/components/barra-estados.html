@@ -1,0 +1,175 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="baseLayout">
+    </head>
+
+    <!---->
+    <!--${workflow}: Nombre del Workflow para saber que barra usar-->
+    <!--${estado_actual.id}: Id del Estado para saber en cual nos encontramos actualmente-->
+    <!---->
+    <body th:fragment="barra-estados" th:switch="${workflow}">
+        <!--Carta Oferta Contraparte-->
+        <div class="status-bar" th:case="'Carta Oferta Contraparte'">
+            <ul>
+                <li>
+                    <i class="status-bar-icon bi" th:classappend="${estado_actual.id} > 1 ? 'on bi-check-lg' : 'bi-1-circle'"></i>
+                    <p>Nuevo<br>Contrato</p>
+                </li>
+                <li>
+                    <i class="status-bar-icon bi bi-check-lg" th:classappend="${estado_actual.id} > 3 ? 'on bi-check-lg' : 'bi-2-circle'"></i>
+                    <p>Revisión<br><br></p>
+                </li>
+                <li>
+                    <i class="status-bar-icon bi" th:classappend="${estado_actual.id} > 4 ? 'on bi-check-lg' : 'bi-4-circle'"></i>
+                    <p>Versión<br>Final</p>
+                </li>
+                <li>
+                    <i class="status-bar-icon bi" th:classappend="${estado_actual.id} > 6 ? 'on bi-check-lg' : 'bi-6-circle'"></i>
+                    <p>Carta<br>Aceptación</p>
+                </li>
+                <li>
+                    <i class="status-bar-icon bi" th:classappend="${estado_actual.id} > 7 ? 'on bi-check-lg' : 'bi-7-circle'"></i>
+                    <p>Firma<br>Impuestos</p>
+                </li>
+                <li>
+                    <i class="status-bar-icon bi" th:classappend="${estado_actual.id} > 8 ? 'on bi-check-lg' : 'bi-8-circle'"></i>
+                    <p>Aceptación<br>Sellada</p>
+                </li>
+                <li>
+                    <i class="status-bar-icon bi" th:classappend="${estado_actual.id} > 9 ? 'on bi-check-lg' : 'bi-9-circle'"></i>
+                    <p>Firma<br>Apoderados</p>
+                </li>
+                <li>
+                    <i class="status-bar-icon bi" th:classappend="${estado_actual.id} > 10 ? 'on bi-check-lg' : 'bi-4-circle'"></i>
+                    <p>Aceptación<br>Firmada</p>
+                </li>
+                <li>
+                    <i class="status-bar-icon bi" th:classappend="${estado_actual.id} > 11 ? 'on bi-check-lg' : 'bi-4-circle'"></i>
+                    <p>Archivo<br><br></p>
+                </li>
+                <li>
+                    <i class="status-bar-icon bi" th:classappend="${estado_actual.id} == 12 ? 'on bi-check-lg' : 'bi-4-circle'"></i>
+                    <p>Finalizado<br><br></p>
+                </li>
+            </ul>
+        </div>
+
+        <!--Carta Oferta BASF-->
+        <div class="status-bar" th:case="'Carta Oferta BASF'">
+            <ul>
+                <li>
+                    <i class="status-bar-icon bi" th:classappend="${estado_actual.id} > 13 ? 'on bi-check-lg' : 'bi-1-circle'"></i>
+                    <p>Nuevo<br>Contrato</p>
+                </li>
+                <li>
+                    <i class="status-bar-icon bi" th:classappend="${estado_actual.id} > 15 ? 'on bi-check-lg' : 'bi-1-circle'"></i>
+                    <p>Revisión<br><br></p>
+                </li>
+                <li>
+                    <i class="status-bar-icon bi" th:classappend="${estado_actual.id} > 16 ? 'on bi-check-lg' : 'bi-1-circle'"></i>
+                    <p>Oferta<br>Validada</p>
+                </li>
+                <li>
+                    <i class="status-bar-icon bi" th:classappend="${estado_actual.id} > 17 ? 'on bi-check-lg' : 'bi-1-circle'"></i>
+                    <p>Firma<br>Impuestos</p>
+                </li>
+                <li>
+                    <i class="status-bar-icon bi" th:classappend="${estado_actual.id} > 18 ? 'on bi-check-lg' : 'bi-1-circle'"></i>
+                    <p>Oferta<br>Sellada</p>
+                </li>
+                <li>
+                    <i class="status-bar-icon bi" th:classappend="${estado_actual.id} > 19 ? 'on bi-check-lg' : 'bi-1-circle'"></i>
+                    <p>Firma<br>Apoderados</p>
+                </li>
+                <li>
+                    <i class="status-bar-icon bi" th:classappend="${estado_actual.id} > 20 ? 'on bi-check-lg' : 'bi-1-circle'"></i>
+                    <p>Oferta<br>Firmada</p>
+                </li>
+                <li>
+                    <i class="status-bar-icon bi" th:classappend="${estado_actual.id} > 21 ? 'on bi-check-lg' : 'bi-1-circle'"></i>
+                    <p>Aceptación<br>Firmada</p>
+                </li>
+                <li>
+                    <i class="status-bar-icon bi" th:classappend="${estado_actual.id} == 22 ? 'on bi-check-lg' : 'bi-1-circle'"></i>
+                    <p>Finalizado<br><br></p>
+                </li>
+            </ul>
+        </div>
+
+        <!--Acuerdo Doble Firma ARG-->
+        <div class="status-bar" th:case="'Acuerdo Doble Firma ARG'">
+            <ul>
+                <li>
+                    <i class="status-bar-icon bi" th:classappend="${estado_actual.id} > 23 ? 'on bi-check-lg' : 'bi-1-circle'"></i>
+                    <p>Nuevo<br>Contrato</p>
+                </li>
+                <li>
+                    <i class="status-bar-icon bi" th:classappend="${estado_actual.id} > 25 ? 'on bi-check-lg' : 'bi-1-circle'"></i>
+                    <p>Revisión<br><br></p>
+                </li>
+                <li>
+                    <i class="status-bar-icon bi" th:classappend="${estado_actual.id} > 26 ? 'on bi-check-lg' : 'bi-1-circle'"></i>
+                    <p>Versión<br>Final</p>
+                </li>
+                <li>
+                    <i class="status-bar-icon bi" th:classappend="${estado_actual.id} > 27 ? 'on bi-check-lg' : 'bi-1-circle'"></i>
+                    <p>Firma<br>Impuestos</p>
+                </li>
+                <li>
+                    <i class="status-bar-icon bi" th:classappend="${estado_actual.id} > 28 ? 'on bi-check-lg' : 'bi-1-circle'"></i>
+                    <p>Recepción<br>Acuerdo</p>
+                </li>
+                <li>
+                    <i class="status-bar-icon bi" th:classappend="${estado_actual.id} > 29 ? 'on bi-check-lg' : 'bi-1-circle'"></i>
+                    <p>Firma<br>Apoderados</p>
+                </li>
+                <li>
+                    <i class="status-bar-icon bi" th:classappend="${estado_actual.id} > 30 ? 'on bi-check-lg' : 'bi-1-circle'"></i>
+                    <p>Acuerdo<br>Firmado</p>
+                </li>
+                <li>
+                    <i class="status-bar-icon bi" th:classappend="${estado_actual.id} > 31 ? 'on bi-check-lg' : 'bi-1-circle'"></i>
+                    <p>Archivo<br><br></p>
+                </li>
+                <li>
+                    <i class="status-bar-icon bi" th:classappend="${estado_actual.id} == 32 ? 'on bi-check-lg' : 'bi-1-circle'"></i>
+                    <p>Finalizado<br><br></p>
+                </li>
+            </ul>
+        </div>
+
+        <!--Acuerdo Doble Firma UY, PY, BOL-->
+        <div class="status-bar" th:case="'Acuerdo Doble Firma UY, PY, BOL'">
+            <ul>
+                <li>
+                    <i class="status-bar-icon bi" th:classappend="${estado_actual.id} > 33 ? 'on bi-check-lg' : 'bi-1-circle'"></i>
+                    <p>Nuevo<br>Contrato</p>
+                </li>
+                <li>
+                    <i class="status-bar-icon bi" th:classappend="${estado_actual.id} > 36 ? 'on bi-check-lg' : 'bi-1-circle'"></i>
+                    <p>Revisión<br><br></p>
+                </li>
+                <li>
+                    <i class="status-bar-icon bi" th:classappend="${estado_actual.id} > 37 ? 'on bi-check-lg' : 'bi-1-circle'"></i>
+                    <p>Versión<br>Final</p>
+                </li>
+                <li>
+                    <i class="status-bar-icon bi" th:classappend="${estado_actual.id} > 38 ? 'on bi-check-lg' : 'bi-1-circle'"></i>
+                    <p>Firma<br>Impuestos</p>
+                </li>
+                <li>
+                    <i class="status-bar-icon bi" th:classappend="${estado_actual.id} > 39 ? 'on bi-check-lg' : 'bi-1-circle'"></i>
+                    <p>Recepción<br>Acuerdo</p>
+                </li>
+                <li>
+                    <i class="status-bar-icon bi" th:classappend="${estado_actual.id} > 40 ? 'on bi-check-lg' : 'bi-1-circle'"></i>
+                    <p>Archivo<br><br></p>
+                </li>
+                <li>
+                    <i class="status-bar-icon bi" th:classappend="${estado_actual.id} == 41 ? 'on bi-check-lg' : 'bi-1-circle'"></i>
+                    <p>Finalizado<br><br></p>
+                </li>
+            </ul>
+        </div>
+    </body>
+</html>

@@ -1,19 +1,16 @@
 package com.autumn;
 
+import com.autumn.model.Estado;
+import com.autumn.model.Workflow;
 import com.autumn.repository.IEntidadLegalRepository;
 import com.autumn.service.BufuService;
+import com.autumn.service.EstadoService;
 import com.autumn.service.UsuarioService;
-import com.autumn.utils.Rol;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import javax.persistence.Column;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collector;
-import java.util.stream.Collectors;
 
 
 @SpringBootTest
@@ -27,6 +24,9 @@ class MakeItLegalApplicationTests {
 
 	@Autowired
 	private IEntidadLegalRepository entidadLegalRepository;
+
+	@Autowired
+	private EstadoService estadoService;
 
 	@Test
 	public void createTest() {

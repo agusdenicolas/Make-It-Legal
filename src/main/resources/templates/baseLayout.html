@@ -1,7 +1,7 @@
-<!DOCTYPE html>
-<html lang="en" xmlns:th="http://thymeleaf.org">
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
     <head>
-        <meta charset="UTF-8">
+        <meta charset="utf-8">
         <title>Make it Legal</title>
         <!-- CSS only -->
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
@@ -9,6 +9,9 @@
 
         <!-- Bootstrap Icons -->
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+
+        <!--CSS Files-->
+        <link th:href="@{/styles/barra-estados.css}" rel="stylesheet" />
     </head>
     <body>
         <style th:inline="css">
@@ -17,6 +20,11 @@
                 --orange-color: #D1512D;
                 --darkgray-color: #393E46;
                 --black-color: #222831;
+                --aquagreen-color: #187888;
+            }
+
+            body{
+                background-color: var(--gray-color);
             }
         </style>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
