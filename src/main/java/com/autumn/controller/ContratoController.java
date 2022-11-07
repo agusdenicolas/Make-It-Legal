@@ -1,9 +1,6 @@
 package com.autumn.controller;
 
-import com.autumn.model.Contrato;
-import com.autumn.model.Estado;
-import com.autumn.model.Historial;
-import com.autumn.model.Workflow;
+import com.autumn.model.*;
 import com.autumn.service.*;
 import com.autumn.utils.Navbar;
 import com.autumn.utils.Rol;
@@ -13,8 +10,8 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+import javax.validation.constraints.NotEmpty;
 import java.util.Date;
 
 @Controller
@@ -37,6 +34,9 @@ public class ContratoController {
 
     @Autowired
     private HistorialService historialService;
+
+    @Autowired
+    private ChatService chatService;
 
     /*---------------Controller for Legales---------------*/
 
@@ -107,6 +107,7 @@ public class ContratoController {
         model.addAttribute("contrato", c);
 
         model.addAttribute("list_historial", historialService.getAllByContrato(c));
+        model.addAttribute("list_chat", chatService.getAllByContrato(c));
 
         return "contratos/usuario/contratos-detalle";
     }
@@ -147,6 +148,24 @@ public class ContratoController {
 
         //Guardamos el contrato
         service.create(contrato);
+    }
+
+    @PostMapping("/{rol}/contratos/{id}/nuevo-chat")
+    public String postChat(@PathVariable("id") Long id, @PathVariable("rol") String rol,
+                           @RequestParam("chat_mensaje") String mensaje, Model model){
+        //El mensaje no puede estar vacío
+        if (mensaje.matches(" *")){
+            return "redirect:/" + rol + "/contratos/" + id + "?error&emptyChatMessage";
+        }
+
+        Contrato contrato = service.getOne(id);
+        Chat chat = new Chat();
+        chat.setContrato(contrato);
+        chat.setMensaje(mensaje);
+        chat.setFecha(new Date());
+        chat.setUsuario(usuarioService.getUsuarioLogeado());
+        chatService.create(chat);
+        return "redirect:/" + rol + "/contratos/" + id;
     }
 
 

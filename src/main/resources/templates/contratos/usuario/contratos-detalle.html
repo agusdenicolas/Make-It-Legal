@@ -23,13 +23,21 @@
                 <!--Sup Derecha -> Historial y Chat-->
                 <section class="col">
                     <h4 class="mb-3">Comentarios</h4>
-                    <div class="border border-secondary mb-3" style="background-color: white; height: 50%; padding: 3px 10px">Lorem ipsum dolor sit amet, consectetur adipisicing elit. At atque esse, exercitationem odit quia quos sed! Aliquam autem cumque ipsam libero modi perspiciatis sequi sit vitae! Aperiam perspiciatis quibusdam sint!</div>
+                    <div class="border border-secondary mb-3" style="background-color: white; height: 50%; padding: 3px 10px; overflow: auto; max-height: 229.4px">
+                        <p th:if="${list_chat}" th:each="x: ${list_chat}"
+                           th:text="'[' + ${#dates.format(x.fecha, 'dd-MM-yyyy HH:mm')} + '] ' + ${x.usuario.nombre} + ' ' + ${x.usuario.apellido} + ': ' + ${x.mensaje}"
+                           style="margin-bottom: 0"
+                        >
+                    </div>
                     <div class="d-flex" style="justify-content: space-between">
                         <button id="open-popup-button" class="rounded" style="width: 20%; background: #fbfbfb; font-size: 14px; font-weight: 500; color: #2c2c2c; border: 2px solid #d1512d">Historial</button>
-                        <div class="d-flex" style="width: 60%; justify-content: end">
-                            <textarea type="text" style="width: -webkit-fill-available; margin-right: .5rem; height: 30px; resize: none"></textarea>
-                            <button style="background: #fbfbfb; border: 1px solid ;"><i class="bi bi-send"></i></button>
-                        </div>
+                        <form th:action="@{/{rol}/contratos/{id}/nuevo-chat(id=${contrato.id}, rol='usuario')}" th:method="POST" class="d-flex" style="width: 60%; justify-content: end">
+                            <textarea th:name="chat_mensaje" type="text" style="width: -webkit-fill-available; margin-right: .5rem; height: 30px; resize: none"></textarea>
+                            <button type="submit" style="background: #fbfbfb; border: 1px solid ;"><i class="bi bi-send"></i></button>
+                        </form>
+                    </div>
+                    <div th:if="${param.error}">
+                        <p th:if="${param.emptyChatMessage}" style="color: red; font-size: 14px; padding-left: 50%">El mensaje no puede estar vacío</p>
                     </div>
                 </section>
             </div>

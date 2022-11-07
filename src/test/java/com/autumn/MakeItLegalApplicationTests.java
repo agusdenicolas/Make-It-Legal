@@ -1,5 +1,6 @@
 package com.autumn;
 
+import com.autumn.model.Chat;
 import com.autumn.model.Contrato;
 import com.autumn.model.Estado;
 import com.autumn.model.Workflow;
@@ -9,6 +10,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.util.Date;
 import java.util.List;
 
 
@@ -32,6 +34,9 @@ class MakeItLegalApplicationTests {
 
 	@Autowired
 	private HistorialService historialService;
+
+	@Autowired
+	private ChatService chatService;
 
 	@Test
 	public void createTest() {
