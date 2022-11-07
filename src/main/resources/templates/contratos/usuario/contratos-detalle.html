@@ -1,0 +1,99 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="baseLayout">
+    </head>
+    <body>
+        <nav th:replace="components/navbar :: navbar"></nav>
+        <div th:replace="components/barra-estados :: barra-estados" th:if="${contrato.workflow}"></div>
+        <div th:insert="components/popup :: popup"></div>
+
+        <div class="container" style="padding: 1rem; background-color: #fafafa">
+            <!--Sup Izquierda -> Informacion del Contrato-->
+            <div class="row mb-2">
+                <section class="col">
+                    <h4>Información</h4>
+                    <p><span>Fecha Creación</span>:  <span th:text="${#dates.format(contrato.fechaEmision, 'dd/MM/yyyy')}"></span></p>
+                    <p><span>Entidad Legal</span>:  <span th:text="${contrato.entidadLegal.nombre}"></span></p>
+                    <p><span>Contraparte</span>:  <span th:text="${contrato.contraparte}"></span></p>
+                    <p><span>IBP</span>:  <span th:text="${contrato.ibp.nombre}"></span></p>
+                    <p><span>BUFU</span>:  <span th:text="${contrato.bufu.nombre}"></span></p>
+                    <p style="margin-bottom: 3rem"><span>Descripcion</span>:  <span th:text="${contrato.descripcion}"></span></p>
+                    <p><span>Datos Adjuntos</span>:  <span th:text="..."></span></p>
+                </section>
+                <!--Sup Derecha -> Historial y Chat-->
+                <section class="col">
+                    <h4 class="mb-3">Comentarios</h4>
+                    <div class="border border-secondary mb-3" style="background-color: white; height: 50%; padding: 3px 10px">Lorem ipsum dolor sit amet, consectetur adipisicing elit. At atque esse, exercitationem odit quia quos sed! Aliquam autem cumque ipsam libero modi perspiciatis sequi sit vitae! Aperiam perspiciatis quibusdam sint!</div>
+                    <div class="d-flex" style="justify-content: space-between">
+                        <button id="open-popup-button" class="rounded" style="width: 20%; background: #fbfbfb; font-size: 14px; font-weight: 500; color: #2c2c2c; border: 2px solid #d1512d">Historial</button>
+                        <div class="d-flex" style="width: 60%; justify-content: end">
+                            <textarea type="text" style="width: -webkit-fill-available; margin-right: .5rem; height: 30px; resize: none"></textarea>
+                            <button style="background: #fbfbfb; border: 1px solid ;"><i class="bi bi-send"></i></button>
+                        </div>
+                    </div>
+                </section>
+            </div>
+            <div class="row">
+                <!--Inf Izquierda -> Checks-->
+                <section class="col">
+                    <h4>Firmas</h4>
+                    <div class="row ps-3" style="width: 400px;">
+                        <span class="form-check col">
+                            <input class="form-check-input" type="checkbox" th:checked="${contrato.fechaFirmaLegales}" onclick="return false;" id="checkLegales">
+                            <label class="form-check-label" for="checkLegales">
+                                Firma Legales
+                            </label>
+                        </span>
+                        <span class="form-check col">
+                            <input class="form-check-input" type="checkbox" th:checked="${contrato.fechaFirmaUsuario}" onclick="return false;" id="checkContraparte">
+                            <label class="form-check-label" for="checkContraparte">
+                                Firma Contraparte
+                            </label>
+                        </span>
+                    </div>
+                    <div class="row ps-3" style="width: 400px;">
+                        <span class="form-check col" style="margin-right: -2.9rem">
+                            <input class="form-check-input" type="checkbox" th:checked="${contrato.fechaFirmaImpuestos}" onclick="return false;" id="checkImpuestos">
+                            <label class="form-check-label" for="checkImpuestos">
+                                Firma Impuestos
+                            </label>
+                        </span>
+                        <span class="form-check col">
+                            <input class="form-check-input" type="checkbox" th:checked="${contrato.fechaFirmaApoderadoUno}" onclick="return false;" style="margin-right: 2rem" id="checkApoderadosUno">
+                            <input class="form-check-input" type="checkbox" th:checked="${contrato.fechaFirmaApoderadoDos}" onclick="return false;" id="checkApoderadosDos">
+                            <label class="form-check-label" for="checkApoderadosDos">
+                                Firma Apoderados
+                            </label>
+                        </span>
+                    </div>
+                </section>
+                <!--Inf Derecha -> Pasos Siguientes-->
+                <section class="col">
+                    <h4>Pasos Siguientes</h4>
+                    <form th:action="@{/{rol}/contratos/{id}(id=${contrato.id}, rol='usuario')}" th:method="POST" th:if="${contrato.workflow}">
+                        <input type="submit" name="uno" th:if="${contrato.estadoActual.proximoEstado}" th:value="${proximoEstado.nombre}" th:disabled="${quienTieneContrato ne 'Usuario'}" th:styleappend="${quienTieneContrato ne 'Usuario'} ? 'background: darkgray' : 'background: var(--orange-color)'" class="fw-bold text-light mt-2 me-5 rounded" style="padding: 5px 10px; border: 0; "/>
+                        <input type="submit" name="dos" th:if="${contrato.estadoActual.proximoEstadoDos}" th:value="${proximoEstadoDos.nombre}" th:disabled="${quienTieneContrato ne 'Usuario'}" th:styleappend="${quienTieneContrato ne 'Usuario'} ? 'background: darkgray' : 'background: var(--orange-color)'" class="fw-bold text-light mt-2 rounded" style="padding: 5px 10px; border: 0; "/>
+                    </form>
+                </section>
+            </div>
+        </div>
+
+        <!-- Script POPUP -->
+        <script>
+            var popup = document.getElementById("popup");
+            var openbtn = document.getElementById("open-popup-button");
+            var closebtn = document.getElementById("close-popup-button");
+            openbtn.onclick = function() {
+                popup.style.display = "block";
+            }
+            closebtn.onclick = function() {
+                popup.style.display = "none";
+            }
+            window.onclick = function(event) {
+                if (event.target == popup) {
+                    popup.style.display = "none";
+                }
+            }
+        </script>
+    </body>
+</html>

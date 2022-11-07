@@ -4,14 +4,17 @@ import com.autumn.model.Usuario;
 import com.autumn.repository.IUsuarioRepository;
 import com.autumn.utils.Rol;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -79,5 +82,20 @@ public class UsuarioService implements UserDetailsService {
 
     public List<Usuario> getAllIbps(){
         return repository.findByRol(Rol.IBP.getRol());
+    }
+
+    public List<Usuario> getAllActiveIbps(){
+        return repository.findByRolAndIsActivoTrue(Rol.IBP.getRol());
+    }
+
+    //Devuelve datos del usuario logeado
+    private Authentication getAuthentication(){
+        return SecurityContextHolder.getContext().getAuthentication();
+    }
+
+    //Busca en la bd el usuario según el mail
+    public Usuario getUsuarioLogeado(){
+        Usuario usuario = repository.findByMail(getAuthentication().getName());
+        return usuario;
     }
 }

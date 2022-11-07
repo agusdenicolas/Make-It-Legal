@@ -1,8 +1,9 @@
 <!DOCTYPE html>
-<html xmlns:th="http://thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org">
     <head th:replace="baseLayout">
     </head>
     <body class="container">
+        <h3>/legales/configuracion/entidadeslegales</h3>
         <table class="table table-md mt-5 mb-5" style="background-color: white">
             <thead style="overflow: auto; background-color: var(--black-color); color: white">
                 <tr class="">
@@ -16,7 +17,7 @@
                 <tr th:each="x : ${list_entidadeslegales}">
                         <td><span th:text="${x.id}" /></td>
                         <td><span th:text="${x.nombre}"/></td>
-                        <td><span th:text="${x.isActivo}"/></td>
+                        <td><span th:text="${x.isActivo} ? Si : No"/></td>
                         <td>
                             <a class="btn" th:href="@{/legales/configuracion/entidadeslegales/{id}(id=${x.id})}" style="padding: 0.05rem 1rem; background-color: var(--orange-color)">
                                 <i class="bi bi-pencil" style="font-size: 1rem; color: white" ></i>
@@ -53,7 +54,7 @@
                         <input id="isActivo2" class="form-check-input" type="checkbox" role="switch" name="isActivo" th:field="*{isActivo}" checked/>
                     </div>
                     <div>
-                        <input type="submit" value="Send" class="fw-bold text-light" style="width: 80%;  padding: 10px; border: 0; background: rgb(252,207,107); background: linear-gradient(45deg, rgba(252,207,107,1) 0%, rgba(244,143,43,1) 50%, rgba(255,108,200,1) 100%)" />
+                        <input type="submit" value="Enviar" class="fw-bold text-light" style="width: 80%;  padding: 10px; border: 0; background: rgb(252,207,107); background: linear-gradient(45deg, rgba(252,207,107,1) 0%, rgba(244,143,43,1) 50%, rgba(255,108,200,1) 100%)" />
                     </div>
                 </form>
             </div>

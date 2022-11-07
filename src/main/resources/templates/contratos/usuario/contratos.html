@@ -1,0 +1,38 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="baseLayout">
+    </head>
+    <body >
+        <nav th:replace="components/navbar :: navbar"></nav>
+        <h3>/usuario/contratos</h3>
+        <div class="container">
+            <div class="mt-1"><a href="/usuario/contratos/nuevo"><i class="bi bi-plus-lg" style="font-size: 26px" ></i></a></div>
+            <table class="table table-md mt-5 mb-5" style="background-color: white">
+                <thead style="overflow: auto; background-color: var(--black-color); color: white">
+                <tr class="">
+                    <th>#</th>
+                    <th>Partes</th>
+                    <th>Fecha Emisión</th>
+                    <th>BUFU / IBP</th>
+                    <th>Estado</th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody class="">
+                <tr th:each="x : ${list_contratos}">
+                    <td><span th:text="${x.id}" /></td>
+                    <td><span th:text="${x.entidadLegal.nombre} + ' / ' + ${x.contraparte}"/></td>
+                    <td><span th:text="${x.fechaEmision}"/></td>
+                    <td><span th:text="${x.bufu.nombre} + ' / ' + ${x.ibp.nombre} + ' ' + ${x.ibp.apellido}"/></td>
+                    <td><span th:text="${x.estadoActual.nombre}" th:if="${x.estadoActual}"/></td>
+                    <td>
+                        <a class="btn" th:href="@{/usuario/contratos/{id}(id=${x.id})}" style="padding: 0.05rem 1rem; background-color: var(--orange-color)">
+                            <i class="bi bi-arrow-right" style="font-size: 1rem; color: white" ></i>
+                        </a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </body>
+</html>

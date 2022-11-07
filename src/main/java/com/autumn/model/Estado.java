@@ -10,7 +10,7 @@ public class Estado {
     @Column(name = "estado_id")
     private Long id;
     @Column(name = "estado_nombre")
-    private String nombreEstado;
+    private String nombre;
     @Column(name = "estado_proximo_estado")
     private Long proximoEstado;
     @Column(name = "estado_proximo_estado_dos")
@@ -30,12 +30,12 @@ public class Estado {
         this.id = id;
     }
 
-    public String getNombreEstado() {
-        return nombreEstado;
+    public String getNombre() {
+        return nombre;
     }
 
-    public void setNombreEstado(String nombreEstado) {
-        this.nombreEstado = nombreEstado;
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
     public Long getProximoEstado() {
@@ -66,7 +66,7 @@ public class Estado {
     public String toString() {
         return "Estado{" +
                 "id=" + id +
-                ", nombreEstado='" + nombreEstado + '\'' +
+                ", nombre='" + nombre + '\'' +
                 ", proximoEstado=" + proximoEstado +
                 ", proximoEstadoDos=" + proximoEstadoDos +
                 '}';

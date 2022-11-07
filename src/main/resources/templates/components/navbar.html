@@ -1,12 +1,25 @@
-<nav th:fragment="navbar" class="navbar" style="background: var(--darkgray-color)">
-    <div class="container-fluid">
-        <a class="navbar-brand">Navbar</a>
-        <form class="d-flex" role="search">
-            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-success" type="submit">Search</button>
-        </form>
+<nav th:fragment="navbar" th:switch="${navbarFlag}" class="navbar mb-4 ps-4"
+     style="background: var(--darkgray-color); color: white"
+     xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5" xmlns:th="http://www.thymeleaf.org"> <!--style="background: var(&#45;&#45;darkgray-color)"-->
+    <div class="container-fluid" th:case="'navbar-general'">
+        <a class="nav-link active" aria-current="page" href="/">
+            <i class="bi bi-house-door" style="font-size: 26px"></i>
+        </a>
         <form th:action="@{/logout}" method="post">
-            <div><input type="submit" value="Log Out" class="fw-bold text-light" style="width: 80%;  padding: 10px; border: 0; background: rgb(252,207,107); background: linear-gradient(45deg, rgba(252,207,107,1) 0%, rgba(244,143,43,1) 50%, rgba(255,108,200,1) 100%)" /></div>
+            <div><input type="submit" value="Cerrar Sesión" class="fw-bold text-light me-4 rounded" style="padding: 5px 10px; border: 0; background-color: var(--orange-color) "/></div>
+        </form>
+    </div>
+    <div class="container-fluid" th:case="'navbar-contratos'">
+        <div class="d-flex" style="gap: 2rem; align-items: center">
+            <a class="nav-link active" aria-current="page" href="javascript:history.back()">
+                <i class="bi bi-x-lg" style="font-size: 26px"></i>
+            </a>
+            <div class="nav-item" th:if="${contrato.workflow}" th:text="${contrato.workflow.workflow} + ' (' + ${contrato.id} + ') - Estado Actual: ' + ${contrato.estadoActual.nombre}" style="font-size: 22px"></div>
+        </div>
+        <form th:action="@{/logout}" method="post" class="d-flex" style="align-items: center; gap: 2rem">
+            <img src="/images/no-user-photo.jpg" alt="No User Photo" width="36px" height="36px">
+            <div class="nav-item" style="font-size: 22px" th:if="${actualUser}" th:text="${actualUser.nombre} + ' ' + ${actualUser.apellido}"></div>
+            <div><input type="submit" value="Cerrar Sesión" class="fw-bold text-light me-4 rounded" style="padding: 5px 10px; border: 0; background-color: var(--orange-color) "/></div>
         </form>
     </div>
 </nav>

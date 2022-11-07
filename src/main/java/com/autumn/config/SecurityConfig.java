@@ -27,8 +27,8 @@ public class SecurityConfig {
                     .hasAuthority(Rol.IBP.getRol())
                     .antMatchers("/register")
                     .permitAll()
-                //    .anyRequest() TODO: Volver a poner el Authenticated
-                //    .authenticated()
+                    .anyRequest() //TODO: Volver a poner el Authenticated
+                    .authenticated()
                 .and()
                     .formLogin()
                     .loginPage("/login")
@@ -46,6 +46,6 @@ public class SecurityConfig {
 
     @Bean
     public WebSecurityCustomizer webSecurityCustomizer() {
-        return (web) -> web.ignoring().antMatchers("/images/**", "/js/**", "/webjars/**");
+        return (web) -> web.ignoring().antMatchers("/images/**", "/js/**", "/webjars/**", "/styles/**");
     }
 }

@@ -12,6 +12,8 @@ public interface IUsuarioRepository extends JpaRepository<Usuario, Long> {
 
     List<Usuario> findByRol(String rol);
 
+    List<Usuario> findByRolAndIsActivoTrue(String rol);
+
     List<Usuario> findByRolIs(String emptyRol);
 
     List<Usuario> findByRolIsNotAndRolIsNot(String rol, String emptyRol);

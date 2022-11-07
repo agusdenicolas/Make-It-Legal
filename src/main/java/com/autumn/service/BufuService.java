@@ -43,4 +43,8 @@ public class BufuService {
     public List<BUFU> getAll(){
         return repository.findAll();
     }
+
+    public List<BUFU> getAllActive(){
+        return repository.findBUFUByIsActivoTrue();
+    }
 }

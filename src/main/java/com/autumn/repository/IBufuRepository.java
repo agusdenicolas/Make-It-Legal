@@ -13,4 +13,6 @@ public interface IBufuRepository extends JpaRepository<BUFU, Long> {
     List<BUFU> findBUFUByIbpsId(Long ibpId);
 
     BUFU findByNombre(String nombre);
+
+    List<BUFU> findBUFUByIsActivoTrue();
 }

@@ -1,11 +1,10 @@
 package com.autumn;
 
+import com.autumn.model.Contrato;
 import com.autumn.model.Estado;
 import com.autumn.model.Workflow;
 import com.autumn.repository.IEntidadLegalRepository;
-import com.autumn.service.BufuService;
-import com.autumn.service.EstadoService;
-import com.autumn.service.UsuarioService;
+import com.autumn.service.*;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -26,9 +25,16 @@ class MakeItLegalApplicationTests {
 	private IEntidadLegalRepository entidadLegalRepository;
 
 	@Autowired
+	private ContratoService contratoService;
+
+	@Autowired
 	private EstadoService estadoService;
+
+	@Autowired
+	private HistorialService historialService;
 
 	@Test
 	public void createTest() {
+
 	}
 }

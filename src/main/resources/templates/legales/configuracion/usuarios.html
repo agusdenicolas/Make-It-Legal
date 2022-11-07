@@ -1,8 +1,9 @@
 <!DOCTYPE html>
-<html xmlns:th="http://thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org">
     <head th:replace="baseLayout">
     </head>
     <body class="container">
+        <h3>/legales/configuracion/usuarios</h3>
         <table class="table table-striped table-bordered">
             <thead style="overflow: auto">
                 <tr>
@@ -19,7 +20,7 @@
                         <td><span th:text="${x.entidadLegal.nombre}" th:if="${x.entidadLegal}" /></td>
                         <td><span th:text="${x.nombre} + ' ' + ${x.apellido}"/></td>
                         <td><span th:text="${x.rol}"/></td>
-                        <td><span th:text="${x.isActivo}"/></td>
+                        <td><span th:text="${x.isActivo} ? Si : No"/></td>
                         <td>
                             <a class="btn btn-primary" th:href="@{/legales/configuracion/usuarios/{id}(id=${x.id})}" style="padding: 0.05rem 1rem">
                                 <i class="bi bi-pencil" style="font-size: 1rem" ></i>
@@ -32,7 +33,7 @@
             <div th:case="post">
                 <form action="#" th:action="@{/legales/configuracion/usuarios}" th:object="${usuario}" th:method="POST">
                     <div>
-                        <p class="h5">Usuario</p>
+                        <p class="h5">Usuario *</p>
                         <select th:field="*{id}" class="form-select">
                             <option value="" ></option>
                             <option th:each="usuario: ${list_nuevos_usuarios}"
@@ -43,7 +44,7 @@
                         <p class="text-danger" th:if="${param.NotUserSelected}">El campo Usuario es obligatorio</p>
                     </div>
                     <div>
-                        <p class="h5">Rol</p>
+                        <p class="h5">Rol *</p>
                         <select th:field="*{rol}" class="form-select">
                             <option value="" ></option>
                             <option th:each="rol: ${list_roles}"
@@ -54,7 +55,7 @@
                         <p class="text-danger" th:if="${param.rolNull}">El campo Rol es obligatorio</p>
                     </div>
                     <div>
-                        <p class="h5">Entidad Legal</p>
+                        <p class="h5">Entidad Legal *</p>
                         <select th:field="*{entidadLegal}" class="form-select">
                             <option value="" ></option>
                             <option th:each="entLegal: ${list_entidadeslegales}"
@@ -62,6 +63,7 @@
                                     th:text="${entLegal.nombre}"
                             />
                         </select>
+                        <p class="text-danger" th:if="${param.rolNull}">El campo Entidad Legal es obligatorio</p> <!--TODO: Ver si esta hecha la validacion y cambiar th:if="${param.rolNull}-->
                     </div>
                     <div class="form-check form-switch">
                         <label th:for="${#ids.next('isActivo')}">Activo</label>
@@ -80,13 +82,13 @@
                     <input type="hidden" name="mail" th:field="*{mail}" class="mb-3" />
                     <input type="hidden" name="contrasena" th:field="*{contrasena}" class="mb-3" />
                     <div>
-                        <p class="h5">Usuario</p>
+                        <p class="h5">Usuario *</p>
                         <select class="form-select" disabled>
                             <option th:text="${usuario.nombre} + ' ' + ${usuario.apellido}" selected></option>
                         </select>
                     </div>
                     <div>
-                        <p class="h5">Rol</p>
+                        <p class="h5">Rol *</p>
                         <select th:field="*{rol}" class="form-select">
                             <option value="" ></option>
                             <option th:each="rol: ${list_roles}"
@@ -97,7 +99,7 @@
                         <p class="text-danger" th:if="${param.rolNull}">El campo Rol es obligatorio</p>
                     </div>
                     <div>
-                        <p class="h5">Entidad Legal</p>
+                        <p class="h5">Entidad Legal *</p>
                         <select th:field="*{entidadLegal}" class="form-select">
                             <option value="" ></option>
                             <option th:each="entLegal: ${list_entidadeslegales}"
@@ -105,6 +107,7 @@
                                     th:text="${entLegal.nombre}"
                             />
                         </select>
+                        <p class="text-danger" th:if="${param.rolNull}">El campo Entidad Legal es obligatorio</p> <!--TODO: Ver si esta hecha la validacion y cambiar th:if="${param.rolNull}-->
                     </div>
                     <div class="form-check form-switch">
                         <label th:for="${#ids.next('isActivo2')}">Activo</label>
