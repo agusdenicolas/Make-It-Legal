@@ -1,14 +1,13 @@
 package com.autumn;
 
-import com.autumn.model.Chat;
-import com.autumn.model.Contrato;
-import com.autumn.model.Estado;
-import com.autumn.model.Workflow;
+import com.autumn.model.*;
 import com.autumn.repository.IEntidadLegalRepository;
+import com.autumn.repository.IUsuarioRepository;
 import com.autumn.service.*;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import java.util.Date;
 import java.util.List;
@@ -38,6 +37,11 @@ class MakeItLegalApplicationTests {
 	@Autowired
 	private ChatService chatService;
 
+	@Autowired
+	private BCryptPasswordEncoder encoder;
+
+	@Autowired
+	private IUsuarioRepository repo;
 	@Test
 	public void createTest() {
 

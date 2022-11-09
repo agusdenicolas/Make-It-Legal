@@ -1,0 +1,15 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="baseLayout">
+</head>
+<body>
+    <nav th:replace="components/navbar :: navbar"></nav>
+    <div class="container">
+        <section>
+            <h2 class="display-4">Cantidad de Contratos Totales: <span th:text="${r_contratos_finalizados} + ${r_contratos_en_curso}"></span></h2>
+            <h4 class="display-6">Finalizados: <p th:text="${r_contratos_finalizados}"></p></h4>
+            <h4 class="display-6">En curso: <p th:text="${r_contratos_en_curso}"></p></h4>
+        </section>
+    </div>
+</body>
+</html>

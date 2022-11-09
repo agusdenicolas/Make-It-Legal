@@ -10,4 +10,6 @@ import java.util.List;
 @Repository
 public interface IEstadoRepository extends JpaRepository<Estado, Long> {
     List<Estado> findByWorkflow(Workflow workflow);
+
+    Estado findFirstByWorkflow(Workflow workflow);
 }

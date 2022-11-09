@@ -27,7 +27,7 @@ public class SecurityConfig {
                     .hasAuthority(Rol.IBP.getRol())
                     .antMatchers("/register")
                     .permitAll()
-                    .anyRequest() //TODO: Volver a poner el Authenticated
+                    .anyRequest()
                     .authenticated()
                 .and()
                     .formLogin()

@@ -3,6 +3,7 @@ package com.autumn.controller;
 import com.autumn.model.Usuario;
 import com.autumn.service.EntidadLegalService;
 import com.autumn.service.UsuarioService;
+import com.autumn.utils.Navbar;
 import com.autumn.utils.Rol;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -60,6 +61,7 @@ public class UsuarioController {
         model.addAttribute("list_entidadeslegales", entidadLegalService.getAll());
         model.addAttribute("usuario", new Usuario());
         model.addAttribute("http_method", "post");
+        model = inicializarComponentesGenerales(model, Navbar.NAVBARGENERAL.getNavbarFlag(), "legales");
 
         return "/legales/configuracion/usuarios";
     }
@@ -74,6 +76,7 @@ public class UsuarioController {
         model.addAttribute("list_entidadeslegales", entidadLegalService.getAll());
         model.addAttribute("usuario", service.getOne(id));
         model.addAttribute("http_method", "put");
+        model = inicializarComponentesGenerales(model, Navbar.NAVBARGENERAL.getNavbarFlag(), "legales");
 
         return "/legales/configuracion/usuarios";
     }
@@ -105,5 +108,17 @@ public class UsuarioController {
 
         service.update(usuario);
         return "redirect:/legales/configuracion/usuarios";
+    }
+
+    //Inicializa componentes como la Navbar y el Usuario Logeado
+    private Model inicializarComponentesGenerales(Model model, String navbarFlag, String navbar_rol){
+        model.addAttribute("navbarFlag", navbarFlag);
+        if (!model.containsAttribute("actualUser")){
+            model.addAttribute("actualUser", service.getUsuarioLogeado());
+        }
+        if (navbar_rol != null){
+            model.addAttribute("navbar_rol", navbar_rol);
+        }
+        return model;
     }
 }

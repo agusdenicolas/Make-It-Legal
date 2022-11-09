@@ -1,9 +1,10 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" th:fragment="popup1">
+<html xmlns:th="http://www.thymeleaf.org" th:fragment="popup-workflow">
     <head>
         <style>
             /* The Modal (background) */
             .modal {
+                display: none; /* Hidden by default */
                 position: fixed; /* Stay in place */
                 z-index: 1; /* Sit on top */
                 padding-top: 100px; /* Location of the box */
@@ -44,22 +45,24 @@
     </head>
     <body>
 
-        <div id="popup1" class="modal" th:styleappend="${open_popup eq true} ? 'display: block'">
+        <!-- Trigger/Open The Modal -->
+        <!--  <button id="open-button">Get User</button>  -->
+
+        <div id="popup_workflow" class="modal">
             <!-- Modal content -->
             <div class="modal-content">
-                <span id="close-button" class="close">&times;</span>
+                <span id="close-popup-workflow-button" class="close">&times;</span>
                 <div style="margin-top: 50px">
                     <form action="#" th:action="@{/legales/contratos/workflow}" th:object="${contrato}" th:method="POST">
-<!--                        <input type="text" name="id" th:value="${contrato.id}" style="visibility: hidden">-->
-<!--                        <p class="h5 mb-5">Workflow</p>-->
-<!--                        <select th:field="*{workflow}" class="form-select mb-5">-->
-<!--                            <option value="" ></option>-->
-<!--                            <option th:each="x: ${list_workflows}"-->
-<!--                                    th:value="${x.id}"-->
-<!--                                    th:text="${x.workflow}"-->
-<!--                            />-->
-<!--                        </select>-->
-                        <p>HOLA SI ESTOY FUNCIONANDO PERRITOOOOOOOOOOO</p>
+                        <input type="text" name="id" th:value="${contrato.id}" style="visibility: hidden">
+                        <p class="h5 mb-5">Workflow</p>
+                        <select th:field="*{workflow}" class="form-select mb-5">
+                            <option value="" ></option>
+                            <option th:each="x: ${list_workflows}"
+                                    th:value="${x.id}"
+                                    th:text="${x.workflow}"
+                            />
+                        </select>
                         <div class="d-flex" style="justify-content: center">
                             <button class="fw-bold text-light rounded" style="width: 150px;padding: 5px 10px; border: 0; background-color: var(--orange-color) " type="submit">Enviar</button>
                         </div>
@@ -67,5 +70,24 @@
                 </div>
             </div>
         </div>
+
+<!--        Pegar Script en donde vaya a usarse el popup-->
+
+<!--        <script>-->
+<!--            var popup = document.getElementById("popup");-->
+<!--            var openbtn = document.getElementById("open-button");-->
+<!--            var closebtn = document.getElementById("close-button");-->
+<!--            openbtn.onclick = function() {-->
+<!--                popup.style.display = "block";-->
+<!--            }-->
+<!--            closebtn.onclick = function() {-->
+<!--                popup.style.display = "none";-->
+<!--            }-->
+<!--            window.onclick = function(event) {-->
+<!--                if (event.target == popup) {-->
+<!--                    popup.style.display = "none";-->
+<!--                }-->
+<!--            }-->
+<!--        </script>-->
     </body>
 </html>

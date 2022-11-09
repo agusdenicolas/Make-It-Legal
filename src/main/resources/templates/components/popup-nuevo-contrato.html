@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:fragment="popup">
+    <head>
+        <style>
+            /* The Modal (background) */
+            .modal {
+                display: none; /* Hidden by default */
+                position: fixed; /* Stay in place */
+                z-index: 1; /* Sit on top */
+                padding-top: 100px; /* Location of the box */
+                left: 0;
+                top: 0;
+                width: 100%; /* Full width */
+                height: 100%; /* Full height */
+                overflow: auto; /* Enable scroll if needed */
+                background-color: rgb(0, 0, 0); /* Fallback color */
+                background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+            }
+
+            /* Modal Content */
+            .modal-content {
+                background-color: #fefefe;
+                margin: auto;
+                padding: 20px;
+                border: 1px solid #888;
+                width: 40%;
+                max-height: 45vh;
+                height: 100%;
+            }
+
+            /* The Close Button */
+            .close {
+                color: #aaaaaa;
+                float: right;
+                font-size: 28px;
+                font-weight: bold;
+            }
+
+            .close:hover, .close:focus {
+                color: #000;
+                text-decoration: none;
+                cursor: pointer;
+            }
+        </style>
+    </head>
+    <body>
+
+        <!-- Trigger/Open The Modal -->
+        <!--  <button id="open-button">Get User</button>  -->
+
+        <div id="popup" class="modal">
+            <!-- Modal content -->
+            <div class="modal-content">
+                <span id="close-popup-button" class="close row">&times;</span>
+                <div class="row mb-5" style="padding: 1rem 3rem; text-align: center; font-size: 18px">
+                    <i>
+                        “Estimado Usuario: Si este acuerdo es Intercompany (entre dos empresas del Grupo BASF) o BASF
+                        actúa como parte vendedora, debe ser solicitado a través de la plataforma ICM. Por favor,
+                        elegir la plataforma correspondiente”.
+                    </i>
+                </div>
+                <div class="row d-flex" style="justify-content: space-evenly;">
+                    <a class="btn btn-primary" href="/usuario/contratos/nuevo" role="button" style="width: 25%;">Continuar Aquí</a>
+                    <a class="btn btn-outline-primary" href="#" role="button" style="width: 25%;">Ir a ICM</a>
+                </div>
+            </div>
+        </div>
+
+<!--        Pegar Script en donde vaya a usarse el popup-->
+
+<!--        <script>-->
+<!--            var popup = document.getElementById("popup");-->
+<!--            var openbtn = document.getElementById("open-button");-->
+<!--            var closebtn = document.getElementById("close-button");-->
+<!--            openbtn.onclick = function() {-->
+<!--                popup.style.display = "block";-->
+<!--            }-->
+<!--            closebtn.onclick = function() {-->
+<!--                popup.style.display = "none";-->
+<!--            }-->
+<!--            window.onclick = function(event) {-->
+<!--                if (event.target == popup) {-->
+<!--                    popup.style.display = "none";-->
+<!--                }-->
+<!--            }-->
+<!--        </script>-->
+    </body>
+</html>

@@ -6,7 +6,8 @@
         <nav th:replace="components/navbar :: navbar"></nav>
         <div th:replace="components/barra-estados :: barra-estados" th:if="${contrato.workflow}"></div>
         <div th:insert="components/popup-historial :: popup"></div>
-        <div th:insert="components/popup :: popup1"></div>
+        <div th:insert="components/popup-workflow :: popup-workflow" th:if="${contrato.workflow} eq null"></div>
+
 
         <div class="container" style="padding: 1rem; background-color: #fafafa">
             <!--Sup Izquierda -> Informacion del Contrato-->
@@ -21,6 +22,9 @@
                     <p style="margin-bottom: 3rem">Descripcion:  <span th:text="${contrato.descripcion}"></span></p>
                     <p>Datos Adjuntos:  <input type="file"/></p>
                 </section>
+                <section style="position: absolute;max-width: 100px;top: 20%;left: 35%;">
+                    <button th:if="${contrato.workflow} eq null" id="open-popup-workflow-button" class="rounded" style="background: #fbfbfb; font-size: 14px; font-weight: 500; color: #2c2c2c; border: 2px solid #d1512d">Workflow</button>
+                </section>
                 <!--Sup Derecha -> Historial y Chat-->
                 <section class="col">
                     <h4 class="mb-3">Comentarios</h4>
@@ -31,8 +35,8 @@
                         >
                     </div>
                     <div class="d-flex" style="justify-content: space-between">
-                        <button id="open-popup-button" class="rounded" style="width: 20%; background: #fbfbfb; font-size: 14px; font-weight: 500; color: #2c2c2c; border: 2px solid #d1512d">Historial</button>
-                        <form th:action="@{/{rol}/contratos/{id}/nuevo-chat(id=${contrato.id}, rol='usuario')}" th:method="POST" class="d-flex" style="width: 60%; justify-content: end">
+                        <button id="open-popup-historial-button" class="rounded" style="width: 20%; background: #fbfbfb; font-size: 14px; font-weight: 500; color: #2c2c2c; border: 2px solid #d1512d">Historial</button>
+                        <form th:action="@{/{rol}/contratos/{id}/nuevo-chat(id=${contrato.id}, rol='legales')}" th:method="POST" class="d-flex" style="width: 60%; justify-content: end">
                             <textarea th:name="chat_mensaje" type="text" style="width: -webkit-fill-available; margin-right: .5rem; height: 30px; resize: none"></textarea>
                             <button type="submit" style="background: #fbfbfb; border: 1px solid ;"><i class="bi bi-send"></i></button>
                         </form>
@@ -84,9 +88,9 @@
                 <!--Inf Derecha -> Pasos Siguientes-->
                 <section class="col">
                     <h4>Pasos Siguientes</h4>
-                    <form th:action="@{/{rol}/contratos/{id}(id=${contrato.id}, rol='usuario')}" th:method="POST" th:if="${contrato.workflow}">
-                        <input type="submit" name="uno" th:if="${contrato.estadoActual.proximoEstado}" th:value="${proximoEstado.nombre}" th:disabled="${quienTieneContrato ne 'Usuario'}" th:styleappend="${quienTieneContrato ne 'Usuario'} ? 'background: darkgray' : 'background: var(--orange-color)'" class="fw-bold text-light mt-2 me-5 rounded" style="padding: 5px 10px; border: 0; "/>
-                        <input type="submit" name="dos" th:if="${contrato.estadoActual.proximoEstadoDos}" th:value="${proximoEstadoDos.nombre}" th:disabled="${quienTieneContrato ne 'Usuario'}" th:styleappend="${quienTieneContrato ne 'Usuario'} ? 'background: darkgray' : 'background: var(--orange-color)'" class="fw-bold text-light mt-2 rounded" style="padding: 5px 10px; border: 0; "/>
+                    <form th:action="@{/{rol}/contratos/{id}(id=${contrato.id}, rol='legales')}" th:method="POST" th:if="${contrato.workflow}">
+                        <input type="submit" name="uno" th:if="${contrato.estadoActual.proximoEstado}" th:value="${proximoEstado.nombre}" th:disabled="${quienTieneContrato ne 'IBP'}" th:styleappend="${quienTieneContrato ne 'IBP'} ? 'background: darkgray' : 'background: var(--orange-color)'" class="fw-bold text-light mt-2 me-5 rounded" style="padding: 5px 10px; border: 0; "/>
+                        <input type="submit" name="dos" th:if="${contrato.estadoActual.proximoEstadoDos}" th:value="${proximoEstadoDos.nombre}" th:disabled="${quienTieneContrato ne 'IBP'}" th:styleappend="${quienTieneContrato ne 'IBP'} ? 'background: darkgray' : 'background: var(--orange-color)'" class="fw-bold text-light mt-2 rounded" style="padding: 5px 10px; border: 0; "/>
                     </form>
                 </section>
             </div>
@@ -94,8 +98,9 @@
 
         <!-- Script POPUP -->
         <script>
+            //Popup Historial
             var popup = document.getElementById("popup");
-            var openbtn = document.getElementById("open-popup-button");
+            var openbtn = document.getElementById("open-popup-historial-button");
             var closebtn = document.getElementById("close-popup-button");
             openbtn.onclick = function() {
                 popup.style.display = "block";
@@ -109,15 +114,19 @@
                 }
             }
 
-            //Pop up generico
-            var popup1 = document.getElementById("popup1");
-            var closebtn1 = document.getElementById("close-button");
-            closebtn1.onclick = function() {
-                popup1.style.display = "none";
+            //Popup Workflow
+            var popup_workflow = document.getElementById("popup_workflow");
+            var openbtn_workflow = document.getElementById("open-popup-workflow-button");
+            var closebtn_workflow = document.getElementById("close-popup-workflow-button");
+            openbtn_workflow.onclick = function() {
+                popup_workflow.style.display = "block";
+            }
+            closebtn_workflow.onclick = function() {
+                popup_workflow.style.display = "none";
             }
             window.onclick = function(event) {
-                if (event.target == popup1) {
-                    popup1.style.display = "none";
+                if (event.target == popup_workflow) {
+                    popup_workflow.style.display = "none";
                 }
             }
 

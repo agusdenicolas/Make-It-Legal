@@ -11,10 +11,12 @@
     </div>
     <div class="container-fluid" th:case="'navbar-contratos'">
         <div class="d-flex" style="gap: 2rem; align-items: center">
-            <a class="nav-link active" aria-current="page" href="javascript:history.back()">
+            <a class="nav-link active" aria-current="page" th:href="'/' + ${navbar_rol} + '/contratos'">
                 <i class="bi bi-x-lg" style="font-size: 26px"></i>
             </a>
-            <div class="nav-item" th:if="${contrato.workflow}" th:text="${contrato.workflow.workflow} + ' (' + ${contrato.id} + ') - Estado Actual: ' + ${contrato.estadoActual.nombre}" style="font-size: 22px"></div>
+            <div th:if="${contrato}"> <!--Hago dos veces el th:if pq necesito ${contrato} para contrato-nuevo y ${contrato.workflow}" para contrato-detalle-->
+                <div class="nav-item" th:if="${contrato.workflow}" th:text="${contrato.workflow.workflow} + ' (' + ${contrato.id} + ') - Estado Actual: ' + ${contrato.estadoActual.nombre}" style="font-size: 22px"></div>
+            </div>
         </div>
         <form th:action="@{/logout}" method="post" class="d-flex" style="align-items: center; gap: 2rem">
             <img src="/images/no-user-photo.jpg" alt="No User Photo" width="36px" height="36px">

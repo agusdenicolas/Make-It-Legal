@@ -2,10 +2,39 @@
 <html xmlns:th="http://www.thymeleaf.org">
     <head th:replace="baseLayout">
     </head>
-    <body>
-        <h1>URL: /legales/contratos</h1>
-        <p>Contratos :)</p>
-        <br>
-        <div th:replace="components/barra-estados :: barra-estados"></div>
+    <body >
+        <nav th:replace="components/navbar :: navbar"></nav>
+        <div class="container">
+            <div class="mt-1"><a href="/legales/reportes"><i class="bi bi-file-earmark-text" style="font-size: 26px; position: absolute; top: 6px;left: 85px; color: white; cursor: pointer;" ></i></a></div>
+            <div class="mt-1"><a href="/legales/configuracion"><i class="bi bi-gear" style="font-size: 26px; position: absolute; top: 6px;left: 135px; color: white; cursor: pointer;" ></i></a></div>
+            <table class="table table-md mt-5 mb-5" style="background-color: white">
+                <thead style="overflow: auto; background-color: var(--black-color); color: white">
+                <tr class="">
+                    <th>#</th>
+                    <th>Partes</th>
+                    <th>Fecha Emisión</th>
+                    <th>Usuario</th>
+                    <th>BUFU / IBP</th>
+                    <th>Estado</th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody class="">
+                <tr th:each="x : ${list_contratos}">
+                    <td><span th:text="${x.id}" /></td>
+                    <td><span th:text="${x.entidadLegal.nombre} + ' / ' + ${x.contraparte}"/></td>
+                    <td><span th:text="${#dates.format(x.fechaEmision, 'dd-MM-yyyy')}"/></td>
+                    <td><span th:text="${x.usuario.nombre} + ' ' + ${x.usuario.apellido}"/></td>
+                    <td><span th:text="${x.bufu.nombre} + ' / ' + ${x.ibp.nombre} + ' ' + ${x.ibp.apellido}"/></td>
+                    <td><span th:text="${x.estadoActual.nombre}" th:if="${x.estadoActual}"/></td>
+                    <td>
+                        <a class="btn" th:href="@{/legales/contratos/{id}(id=${x.id})}" style="padding: 0.05rem 1rem; background-color: var(--orange-color)">
+                            <i class="bi bi-arrow-right" style="font-size: 1rem; color: white" ></i>
+                        </a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
     </body>
 </html>

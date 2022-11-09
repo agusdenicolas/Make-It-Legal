@@ -4,15 +4,14 @@
     </head>
     <body >
         <nav th:replace="components/navbar :: navbar"></nav>
-        <div th:insert="components/popup-nuevo-contrato :: popup"></div>
         <div class="container">
-            <div class="mt-1"><a id="open-popup-button" ><i class="bi bi-plus-lg" style="font-size: 26px; position: absolute; top: 6px;left: 85px; color: white; cursor: pointer;" ></i></a></div>
             <table class="table table-md mt-5 mb-5" style="background-color: white">
                 <thead style="overflow: auto; background-color: var(--black-color); color: white">
                 <tr class="">
                     <th>#</th>
                     <th>Partes</th>
                     <th>Fecha Emisión</th>
+                    <th>Usuario</th>
                     <th>BUFU / IBP</th>
                     <th>Estado</th>
                     <th></th>
@@ -23,10 +22,11 @@
                     <td><span th:text="${x.id}" /></td>
                     <td><span th:text="${x.entidadLegal.nombre} + ' / ' + ${x.contraparte}"/></td>
                     <td><span th:text="${#dates.format(x.fechaEmision, 'dd-MM-yyyy')}"/></td>
+                    <td><span th:text="${x.usuario.nombre} + ' ' + ${x.usuario.apellido}"/></td>
                     <td><span th:text="${x.bufu.nombre} + ' / ' + ${x.ibp.nombre} + ' ' + ${x.ibp.apellido}"/></td>
                     <td><span th:text="${x.estadoActual.nombre}" th:if="${x.estadoActual}"/></td>
                     <td>
-                        <a class="btn" th:href="@{/usuario/contratos/{id}(id=${x.id})}" style="padding: 0.05rem 1rem; background-color: var(--orange-color)">
+                        <a class="btn" th:href="@{/apoderados/contratos/{id}(id=${x.id})}" style="padding: 0.05rem 1rem; background-color: var(--orange-color)">
                             <i class="bi bi-arrow-right" style="font-size: 1rem; color: white" ></i>
                         </a>
                     </td>
@@ -34,23 +34,5 @@
                 </tbody>
             </table>
         </div>
-
-        <!-- Script POPUP -->
-        <script>
-            var popup = document.getElementById("popup");
-            var openbtn = document.getElementById("open-popup-button");
-            var closebtn = document.getElementById("close-popup-button");
-            openbtn.onclick = function() {
-                popup.style.display = "block";
-            }
-            closebtn.onclick = function() {
-                popup.style.display = "none";
-            }
-            window.onclick = function(event) {
-                if (event.target == popup) {
-                    popup.style.display = "none";
-                }
-            }
-        </script>
     </body>
 </html>

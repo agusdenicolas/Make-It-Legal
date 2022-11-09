@@ -25,4 +25,8 @@ public class EstadoService {
         }
         return null;
     }
+
+    public Estado getFirstByWorkflow(Workflow workflow){
+        return repository.findFirstByWorkflow(workflow);
+    }
 }

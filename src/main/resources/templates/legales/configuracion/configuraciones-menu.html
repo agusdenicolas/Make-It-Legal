@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="baseLayout">
+        <meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
+    </head>
+    <body class="d-flex" style="background: var(--gray-color)">
+        <!-- <div th:replace="components/navbar :: navbar" /> -->
+
+        <h1>Make it Legal</h1>
+        <div class="container">
+            <div class="row">
+                <a href="/legales/configuracion/entidadeslegales">
+                    <button class="col-6 col-sm-3 m-3" style="background: var(--orange-color)">
+                        Entidades Legales
+                    </button>
+                </a>
+                <a href="/legales/configuracion/bufu-ibp">
+                    <button class="col-6 col-sm-3 m-3" style="background: var(--orange-color)">
+                        BUFU/IBP
+                    </button>
+                </a>
+            </div>
+            <div class="row">
+                <a href="/legales/configuracion/usuarios">
+                    <button class="col-6 col-sm-3 m-3" style="background: var(--orange-color)">
+                        Usuarios
+                    </button>
+                </a>
+            </div>
+        </div>
+        <script>
+            var popup = document.getElementById("popup");
+            var openbtn = document.getElementById("open-popup-button");
+            var closebtn = document.getElementById("close-popup-button");
+            openbtn.onclick = function() {
+                popup.style.display = "block";
+            }
+            closebtn.onclick = function() {
+                popup.style.display = "none";
+            }
+            window.onclick = function(event) {
+                if (event.target == popup) {
+                    popup.style.display = "none";
+                }
+            }
+        </script>
+    </body>
+</html>

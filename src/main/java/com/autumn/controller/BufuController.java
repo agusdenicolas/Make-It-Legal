@@ -4,6 +4,7 @@ import com.autumn.model.BUFU;
 import com.autumn.model.Usuario;
 import com.autumn.service.BufuService;
 import com.autumn.service.UsuarioService;
+import com.autumn.utils.Navbar;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -29,6 +30,7 @@ public class BufuController {
         model.addAttribute("bufu", new BUFU());
         model.addAttribute("list_ibp", usuarioService.getAllIbps());
         model.addAttribute("http_method", "post");
+        model = inicializarComponentesGenerales(model, Navbar.NAVBARGENERAL.getNavbarFlag(), "legales");
 
         return "/legales/configuracion/bufu";
     }
@@ -68,6 +70,7 @@ public class BufuController {
         model.addAttribute("ibp", new Usuario());
         model.addAttribute("list_ibp", usuarioService.getAllIbps());
         model.addAttribute("http_method", "put");
+        model = inicializarComponentesGenerales(model, Navbar.NAVBARGENERAL.getNavbarFlag(), "legales");
 
         return "/legales/configuracion/bufu";
     }
@@ -90,5 +93,17 @@ public class BufuController {
         service.update(bufu);
 
         return "redirect:/legales/configuracion/bufu-ibp/" + id;
+    }
+
+    //Inicializa componentes como la Navbar y el Usuario Logeado
+    private Model inicializarComponentesGenerales(Model model, String navbarFlag, String navbar_rol){
+        model.addAttribute("navbarFlag", navbarFlag);
+        if (!model.containsAttribute("actualUser")){
+            model.addAttribute("actualUser", usuarioService.getUsuarioLogeado());
+        }
+        if (navbar_rol != null){
+            model.addAttribute("navbar_rol", navbar_rol);
+        }
+        return model;
     }
 }
